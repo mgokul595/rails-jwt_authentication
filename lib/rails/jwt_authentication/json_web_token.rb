@@ -1,3 +1,5 @@
+require 'jwt'
+
 module Rails
   module JwtAuthentication
     class JsonWebToken

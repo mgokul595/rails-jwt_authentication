@@ -1,5 +1,5 @@
-require "rails/jwt_authentication/version"
-require 'jwt'
+require 'rails/jwt_authentication/version'
+require 'rails/jwt_authentication/json_web_token'
 
 module Rails
   module JwtAuthentication
@@ -26,7 +26,7 @@ module Rails
       end
 
       # To create a new JWT Token after validating user
-      def create_jwt_token(user, exp_time, iat_time)
+      def self.create_jwt_token(user, exp_time, iat_time)
         return nil unless user and user.id
         {
             auth_token: JsonWebToken.encode(
@@ -39,7 +39,7 @@ module Rails
         }
       end
 
-      def create_refresh_token
+      def self.create_refresh_token
         loop do
           random_token = SecureRandom.urlsafe_base64
           return random_token unless User.exists?(refresh_token: random_token)
