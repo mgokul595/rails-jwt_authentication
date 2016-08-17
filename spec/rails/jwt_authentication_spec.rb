@@ -6,7 +6,7 @@ describe Rails::JwtAuthentication do
   end
 
   it 'does something useful' do
-    token = Rails::JwtAuthentication.encode({name: 'hai'})
-    expect(token).to be_a(String)
+    token = Rails::JwtAuthentication::Authenticate.create_jwt_token('hai', Time.now(), Time.now())
+    expect(token[:auth_token]).to be_a(String)
   end
 end
